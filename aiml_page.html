@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machine Learning</title>
+<link rel="stylesheet" href="main.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<style>  
+body {
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    background-color: #fffbfb;
+  }
+
+  h3{
+    font-weight: bold;
+    font-size: large;
+  }
+  
+  /* Container for the grid of product cards */
+  .product-grid {
+    display: grid;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  /* Individual product card styles */
+  .product-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  .product-card:hover{
+    scale: 1.05;
+    transition-duration: 200ms;
+  }
+  
+  .product-card img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  .product-info {
+    flex-grow: 1;
+    padding-top: 20px;
+  }
+  
+  /* Price tag styles */
+  .price {
+    font-weight: bold;
+    color: #333333;
+    margin-top: 10px;
+  }
+  
+  /* Add to Cart button styles */
+  .add-to-cart {
+    background-color: #070808;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-to-cart:hover {
+    background-color: #45a049;
+  }
+  /* Like button styles */
+  .like-button {
+    background-color: #110d0d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-end;
+  }
+  
+  .like-button:hover {
+    background-color: #d32f2f;
+  }
+</style>
+</head>
+<body>
+    <header class="flex flex-col w-full  border shadow-md ">
+        <div class="flex flex-row items-center gap-4 bg-white border shadow-transparent">
+           <div class="flex flex-row w-[10%] items-center relative justify-around">
+            <a href="main_page.html" class="cursor-pointer"><img src="images/logo.png" width="80" height="80" ></a>
+            <div class="hover:text-purple-500 cursor-pointer">Categories</div>
+           </div>
+            <div class="w-[55%] "><input type="text" placeholder=" &nbsp; &#xF002; &nbsp; Search for Anything" style="font-family:Arial, FontAwesome" class="border border-black w-full hover:border-black rounded-full h-12" /></div>
+            <div class="flex flex-row w-[35%] items-center justify-evenly text-sm">
+                <div class="hover:text-purple-500 cursor-pointer">EduQuest Business</div>
+                <div class="hover:text-purple-500 cursor-pointer">Tech on EduQuest</div>
+                <div class="hover:text-purple-500 cursor-pointer">My Learning</div>
+                <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer" ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                <svg fill="#000000" width="32px" height="32px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M19,14a1,1,0,0,0,.949-.684l2-6A1,1,0,0,0,21,6H7V2A1,1,0,0,0,6,1H3A1,1,0,0,0,3,3H5V17a1,1,0,0,0,1,1H18a1,1,0,0,0,0-2H7V14ZM7,8H19.613l-1.334,4H7ZM6.5,19A1.5,1.5,0,1,1,5,20.5,1.5,1.5,0,0,1,6.5,19Zm10,0A1.5,1.5,0,1,1,15,20.5,1.5,1.5,0,0,1,16.5,19Z"></path></g></svg>
+                <svg width="32px" height="32px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>Bell</title> <g id="Bell" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <rect id="Container" x="0" y="0" width="24" height="24"> </rect> <path d="M12,5 C15.3137085,5 18,7.6862915 18,11 L18,18 L18,18 L6,18 L6,11 C6,7.6862915 8.6862915,5 12,5 Z" id="shape-1" stroke="#030819" stroke-width="2" stroke-linecap="round" stroke-dasharray="0,0"> </path> <path d="M12,3 C12.5522847,3 13,3.44771525 13,4 L13,5 L13,5 L11,5 L11,4 C11,3.44771525 11.4477153,3 12,3 Z" id="shape-2" stroke="#030819" stroke-width="2" stroke-linecap="round" stroke-dasharray="0,0"> </path> <line x1="4" y1="18" x2="20" y2="18" id="shape-3" stroke="#030819" stroke-width="2" stroke-linecap="round" stroke-dasharray="0,0"> </line> <line x1="11" y1="21" x2="13" y2="21" id="shape-4" stroke="#030819" stroke-width="2" stroke-linecap="round" stroke-dasharray="0,0"> </line> </g> </g></svg>
+                <svg width="32px" height="32px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg" class="cursor-pointer"><g id="SVGRepo_bgCarrier" stroke-width="0"><rect x="0" y="0" width="24.00" height="24.00" rx="12" fill="#000000" strokewidth="0"></rect></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g clip-path="url(#clip0_15_82)"> <rect width="24" height="24" fill="white"></rect> <g filter="url(#filter0_d_15_82)"> <path d="M14.3365 12.3466L14.0765 11.9195C13.9082 12.022 13.8158 12.2137 13.8405 12.4092C13.8651 12.6046 14.0022 12.7674 14.1907 12.8249L14.3365 12.3466ZM9.6634 12.3466L9.80923 12.8249C9.99769 12.7674 10.1348 12.6046 10.1595 12.4092C10.1841 12.2137 10.0917 12.022 9.92339 11.9195L9.6634 12.3466ZM4.06161 19.002L3.56544 18.9402L4.06161 19.002ZM19.9383 19.002L20.4345 18.9402L19.9383 19.002ZM16 8.5C16 9.94799 15.2309 11.2168 14.0765 11.9195L14.5965 12.7737C16.0365 11.8971 17 10.3113 17 8.5H16ZM12 4.5C14.2091 4.5 16 6.29086 16 8.5H17C17 5.73858 14.7614 3.5 12 3.5V4.5ZM7.99996 8.5C7.99996 6.29086 9.79082 4.5 12 4.5V3.5C9.23854 3.5 6.99996 5.73858 6.99996 8.5H7.99996ZM9.92339 11.9195C8.76904 11.2168 7.99996 9.948 7.99996 8.5H6.99996C6.99996 10.3113 7.96342 11.8971 9.40342 12.7737L9.92339 11.9195ZM9.51758 11.8683C6.36083 12.8309 3.98356 15.5804 3.56544 18.9402L4.55778 19.0637C4.92638 16.1018 7.02381 13.6742 9.80923 12.8249L9.51758 11.8683ZM3.56544 18.9402C3.45493 19.8282 4.19055 20.5 4.99996 20.5V19.5C4.70481 19.5 4.53188 19.2719 4.55778 19.0637L3.56544 18.9402ZM4.99996 20.5H19V19.5H4.99996V20.5ZM19 20.5C19.8094 20.5 20.545 19.8282 20.4345 18.9402L19.4421 19.0637C19.468 19.2719 19.2951 19.5 19 19.5V20.5ZM20.4345 18.9402C20.0164 15.5804 17.6391 12.8309 14.4823 11.8683L14.1907 12.8249C16.9761 13.6742 19.0735 16.1018 19.4421 19.0637L20.4345 18.9402Z" fill="#000000"></path> </g> </g> <defs> <filter id="filter0_d_15_82" x="2.55444" y="3.5" width="18.8911" height="19" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"> <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood> <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix> <feOffset dy="1"></feOffset> <feGaussianBlur stdDeviation="0.5"></feGaussianBlur> <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"></feColorMatrix> <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_15_82"></feBlend> <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_15_82" result="shape"></feBlend> </filter> <clipPath id="clip0_15_82"> <rect width="24" height="24" fill="white"></rect> </clipPath> </defs> </g></svg>
+            </div>
+        </div>           
+            <div class="max-w-[1080px] w-9/11 flex flex-col items-center mx-auto my-3">
+                <div class="flex flex-row text-sm w-full gap-5">
+                    <div class="hover:text-purple-500 cursor-pointer">Development</div>
+                    <div class="hover:text-purple-500 cursor-pointer">Business</div>
+                    <div class="hover:text-purple-500 cursor-pointer">Finance  & Accounting</div>
+                    <div class="hover:text-purple-500 cursor-pointer">IT & Software</div>
+                    <div class="hover:text-purple-500 cursor-pointer">Office Productivity</div>
+                    <div class="hover:text-purple-500 cursor-pointer">Personal Development</div>
+                    <div class="hover:text-purple-500 cursor-pointer">Design</div>
+                    <div class="hover:text-purple-500 cursor-pointer">Marketing</div>
+                    <div class="hover:text-purple-500 cursor-pointer">Health & Fitness</div>
+                    <div class="hover:text-purple-500 cursor-pointer">Music</div>
+                </div>
+            </div>
+    </header>
+
+    <div class="w-9/11 relative max-w-[1080px] pt-5 mt-5 mb-10 mx-auto ml-48">
+        <div class="text-gray-800 text-4xl font-bold font-sans flex flex-row justify-start">Featured courses in&nbsp; <span class="text-purple-500 underline">Machine Learning</span></div>
+    </div>
+
+  <div class="product-grid">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="images/deep_learning.png" alt="Deep learning">
+      <div class="product-info">
+        <h3>Deep Learning Linguistic Neural Networks
+            </h3>
+        <p> Master Deep learning a subset of machine learning that utilizes artificial neural networks with multiple layers to learn complex patterns in data.</p>
+        <div class="price">₹4999</div>
+      </div>
+      <button class="add-to-cart">LEARN NOW</button>
+      <button class="like-button">&#10084;</button>
+    </div>
+    
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="images/AiMl.png" alt="Artificial intelligence">
+      <div class="product-info">
+        <h3>Artificial intelligence and Machine Learning</h3>
+        <p>Artificial Intelligence refers to the simulation of Human intelligence processes by machines, including problem-solving, and decision-making.</p>
+        <div class="price">₹3299</div>
+      </div>
+      <button class="add-to-cart">LEARN NOW</button>
+      <button class="like-button">&#10084;</button>
+    </div>
+
+    <div class="product-card">
+        <img src="images/data_science.png" alt="Data Science">
+        <div class="product-info">
+          <h3>Data Science Foundations using R</h3>
+          <p>Become a Data Scientist and get hired
+            Master Machine Learning and use it on the job
+            Deep Learning.</p>
+          <div class="price">₹3899</div>
+        </div>
+        <button class="add-to-cart">LEARN NOW</button>
+        <button class="like-button">&#10084;</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/pytorch.png" alt="Pytorch">
+        <div class="product-info">
+          <h3>Learn Unsupervised from scratch</h3>
+          <p>Understand the fundamentals of linear algebra and calculus, critical mathematical subjects underlying all of machine learning and data science
+            Manipulate tensors using all three of the most important Python tensor libraries: NumPy, TensorFlow, and PyTorch</p>
+          <div class="price">₹4399</div>
+        </div>
+        <button class="add-to-cart">LEARN NOW</button>
+        <button class="like-button">&#10084;</button>
+      </div>
+
+      <div class="product-card">
+        <img src="images/adml.png" alt="Advanced Machine Learning">
+        <div class="product-info">
+          <h3>Advanced Machine Learning with R</h3>
+          <p>mplement advanced dimensionality reduction techniques like t-SNE (t-Distributed Stochastic Neighbor Embedding), UMAP (Uniform Manifold Approximation and Projection), and autoencoders using packages such as Rtsne, umap, and keras.</p>
+          <div class="price">₹6599</div>
+        </div>
+        <button class="add-to-cart">LEARN NOW</button>
+        <button class="like-button">&#10084;</button>
+      </div>
+
+      
+    
+    <!-- Add more products here -->
+  </div>
+
+  <div class="w-full bg-gray-950">
+    <div class="flex flex-row mx-10 justify-around h-20 items-center">
+        <div class="text-white font-serif text-3xl">Top companies choose EduQuest Business to build in-demand career skills.</div>
+        <div class="flex flex-row justify-evenly gap-3">
+            <div><img src="images/nasdaq-light.svg" alt=""></div>
+            <div><img src="images/volkswagen-light.svg" alt=""></div>
+            <div><img src="images/box-light.svg" alt=""></div>
+            <div><img src="images/netapp-light.svg" alt=""></div>
+            <div><img src="images/eventbrite-light.svg" alt=""></div>
+        </div>
+    </div>
+</div>
+
+  <div  class="w-full bg-gray-950 pt-10 h-[400px] border border-slate-600 border-x-0  flex flex-row">
+    <div class="w-4/5 mx-10">
+       <div class="flex w-2/3 flex-row gap-[100px]">
+        <div class="text-white flex flex-col gap-2">
+            <a href="" class="hover:underline cursor-pointer"><div>EduQuest Business</div></a>
+            <a href="" class="hover:underline cursor-pointer"><div>Teach on EduQuest</div></a>
+            <a href="" class="hover:underline cursor-pointer"><div>Get the app</div></a>
+            <a href="" class="hover:underline cursor-pointer"><div>About us</div></a>
+            <a href="" class="hover:underline cursor-pointer"><div>Contact us</div></a>
+        </div>
+        <div class="text-white flex flex-col gap-2">
+            <a href="" class="hover:underline cursor-pointer"><div>Careers</div></a>
+            <a href="" class="hover:underline cursor-pointer"><div>Blog</div></a>
+            <a href="" class="hover:underline cursor-pointer"><div>Help and Support</div></a>
+            <a href="" class="hover:underline cursor-pointer"><div>Affiliate</div></a>
+            <a href="" class="hover:underline cursor-pointer"><div>Investors</div></a>
+        </div>
+        <div class="text-white flex flex-col gap-2">
+            <a href="" class="hover:underline cursor-pointer"><div> Terms</div></a>
+            <a href="" class="hover:underline cursor-pointer"><div>Privacy policy</div></a>
+            <a href="" class="hover:underline cursor-pointer"><div>Cookie settings</div></a>
+            <a href="" class="hover:underline cursor-pointer"><div>Sitemap</div></a>
+            <a href="" class="hover:underline cursor-pointer"><div>Accessibility statement</div></a>
+        </div>
+       </div>
+    </div>
+    <div class="w-1/5 text-white relative">
+        <div class="flex flex-row gap-2 border w-[98px] p-2 cursor-pointer">
+            <div>
+                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M7.99998 3H8.99998C7.04998 8.84 7.04998 15.16 8.99998 21H7.99998" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15 3C16.95 8.84 16.95 15.16 15 21" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 16V15C8.84 16.95 15.16 16.95 21 15V16" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 9.0001C8.84 7.0501 15.16 7.0501 21 9.0001" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            </div>
+            <div>English</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
